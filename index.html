@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>João Paulo | Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-light: #f9fafb;
+      --bg-dark: #1a1a1a;
+      --text-light: #1a1a1a;
+      --text-dark: #f9fafb;
+      --highlight-light: #3b82f6;
+      --highlight-dark: #a5b4fc;
+      --border-light: #e5e7eb;
+      --border-dark: #333333;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .carrossel-wrapper {
+      overflow: hidden;
+      width: 100%;
+      background-color: var(--border-light);
+    }
+
+    .carrossel-track {
+      display: flex;
+      width: max-content;
+      animation: mover 40s linear infinite;
+    }
+
+    @keyframes mover {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .skill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      min-width: 120px;
+      transition: transform 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+    }
+
+    .skill img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+
+    #hero video {
+      filter: brightness(0.7);
+    }
+
+    .modal {
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .project-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-dark-accent {
+      background-color: #2d2d2d;
+    }
+
+    .bg-light-accent {
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)]">
+  <!-- Navbar -->
+  <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <nav class="hidden md:flex space-x-8">
+        <a href="#habilidades"
+          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Habilidades</a>
+        <a href="#sobre"
+          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Sobre</a>
+        <a href="#projetos"
+          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Projetos</a>
+        <a href="#hackathon"
+          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Hackathon</a>
+      </nav>
+      <button id="botaoTema" onclick="alternarTema()"
+        class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+        🌓 Tema
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative h-screen flex items-center justify-center">
+    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
+      <source src="src/video/wall.mp4" type="video/mp4">
+    </video>
+    <div class="relative z-10 text-center text-white px-4">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 animate__animated animate__fadeInUp">JOÃO PAULO</h1>
+      <hr class="text-xl md:text-2xl text-gray-200 animate__animated animate__fadeInUp animate__delay-1s">
+      <p class="text-xl md:text-2xl text-gray-200 animate__animated animate__fadeInUp animate__delay-1s">
+        Desenvolvedor Full Stack
+      </p>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section id="habilidades" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Habilidades</h2>
+      <div class="carrossel-wrapper rounded-xl">
+        <div class="carrossel-track">
+          <!-- Skills will be injected by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Mim -->
+  <section id="sobre" class="py-20 bg-white dark:bg-gray-800">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-8">Sobre Mim</h2>
+        <img src="assets/profile.jpg" alt="João Paulo"
+          class="w-48 h-48 rounded-full mx-auto mb-6 border-4 border-[var(--highlight-light)] dark:border-[var(--highlight-dark)]">
+        <p class="text-lg leading-relaxed mb-6">
+          Sou um desenvolvedor full stack apaixonado por criar soluções inovadoras...
+        </p>
+        <button onclick="abrirModal('sobre')"
+          class="btn bg-[var(--highlight-light)] hover:bg-[var(--highlight-light)] dark:bg-[var(--highlight-dark)] dark:hover:bg-[var(--highlight-dark)] text-white">Ver
+          mais</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projetos -->
+  <section id="projetos" class="py-20 bg-gray-100 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Projetos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project cards will be injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 dark:bg-black text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; 2024 João Paulo. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Modais -->
+  <div id="modalSobre" class="modal fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+    <div class="modal-content bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-8 relative">
+      <button onclick="fecharModal('sobre')" class="absolute top-4 right-4 text-2xl hover:text-red-500">&times;</button>
+      <h3 class="text-2xl font-bold mb-4">Detalhes Sobre Mim</h3>
+      <p class="text-gray-600 dark:text-gray-300">
+        Informações detalhadas sobre experiência profissional e formação...
+      </p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Inicialização
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Controle do Tema
+    function alternarTema() {
+      const html = document.documentElement;
+      html.classList.toggle('dark');
+      localStorage.setItem('tema', html.classList.contains('dark') ? 'dark' : 'light');
+      atualizarBotaoTema();
+    }
+
+    function atualizarBotaoTema() {
+      const botao = document.getElementById('botaoTema');
+      botao.textContent = document.documentElement.classList.contains('dark') ? '☀️ Tema Claro' : '🌙 Tema Escuro';
+    }
+
+    // Carregar Habilidades
+    const habilidades = [
+      { nome: "TypeScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { nome: "Tailwind CSS", img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
+      { nome: "Bootstrap", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
+      { nome: "Git", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { nome: "GitHub", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { nome: "Java", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { nome: "SQL", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { nome: "C#", img: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" },
+      { nome: "Prisma", img: "https://images.icon-icons.com/3914/PNG/512/prisma_logo_icon_248778.png" },
+      { nome: "Node.js", img: "https://www.shareicon.net/data/512x512/2015/09/11/99371_javascript_512x512.png" },
+      { nome: "React", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { nome: "Next.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { nome: "JavaScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { nome: "HTML5", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { nome: "CSS3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+      { nome: "Figma", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+      { nome: "PostgreSQL", img: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" },
+    ];
+
+    const carrosselTrack = document.querySelector('.carrossel-track');
+    habilidades.forEach(habilidade => {
+      const div = document.createElement('div');
+      div.classList.add('skill');
+      div.innerHTML = `
+        <img src="${habilidade.img}" alt="${habilidade.nome}" class="mb-2">
+        <span class="text-lg font-semibold">${habilidade.nome}</span>
+      `;
+      carrosselTrack.appendChild(div);
+    });
+
+    // Carregar Tema
+    const temaSalvo = localStorage.getItem('tema') || 'light';
+    if (temaSalvo === 'dark') document.documentElement.classList.add('dark');
+    atualizarBotaoTema();
+  </script>
+</body>
+
+</html>
