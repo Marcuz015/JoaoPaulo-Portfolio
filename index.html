@@ -120,6 +120,16 @@
     .dark-mode .bg-gray-100 {
       background-color: #111;
     }
+
+
+    a:hover{
+      font-size: 28px;
+      transition: 1s;
+    }
+
+    a{
+      transition: 2s;
+    }
   </style>
 </head>
 
@@ -128,7 +138,7 @@
   <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md dark:bg-gray-900/80">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <nav class="hidden md:flex space-x-8">
-        <a href="#habilidades" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Habilidades</a>
+        <a href="#habilidades" class="nav-link hover:text-blue-500 scale-100 dark:hover:text-indigo-300">Habilidades</a>
         <a href="#sobre" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Sobre</a>
         <a href="#projetos" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Projetos</a>
         <a href="#hackathon" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Hackathon</a>
@@ -201,15 +211,15 @@
   </footer>
 
   <!-- Modais -->
-  <div id="modalSobre" class="modal fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
-    <div class="modal-content bg-white dark:bg-gray-800 rounded-xl max-w-2xl w-full p-8 relative">
+  <div id="modalSobre" class="modal fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
+    <div class="modal-content bg-white dark:bg-gray-800 w-full h-full overflow-y-auto p-8 relative">
       <button onclick="fecharModal('sobre')" class="absolute top-4 right-4 text-2xl hover:text-red-500">&times;</button>
       <h3 class="text-2xl font-bold mb-4">Detalhes Sobre Mim</h3>
       <p class="text-gray-600 dark:text-gray-300">
         Informações detalhadas sobre experiência profissional e formação...
       </p>
     </div>
-  </div>
+</div>  
 
   <script>
     // Funções do tema
@@ -249,8 +259,8 @@
       { nome: "Java", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
       { nome: "SQL", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { nome: "C#", img: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" },
-      { nome: "Prisma", img: "https://images.icon-icons.com/3914/PNG/512/prisma_logo_icon_248778.png" },
-      { nome: "Node.js", img: "https://www.shareicon.net/data/512x512/2015/09/11/99371_javascript_512x512.png" },
+      { nome: "Prisma", img: "https://cdn.worldvectorlogo.com/logos/prisma-4.svg" },
+      { nome: "Node.js", img: "https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-5-pack-logos-icons-3030179.png?f=webp&w=256" },
       { nome: "React", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { nome: "Next.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
       { nome: "JavaScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
