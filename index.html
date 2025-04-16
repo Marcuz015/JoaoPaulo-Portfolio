@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
     :root {
@@ -29,12 +28,24 @@
     body {
       font-family: 'Poppins', sans-serif;
       transition: background-color 0.3s, color 0.3s;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      font-size: 25px;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     .carrossel-wrapper {
       overflow: hidden;
       width: 100%;
       background-color: var(--border-light);
+    }
+
+    .dark-mode .carrossel-wrapper {
+      background-color: var(--border-dark);
     }
 
     .carrossel-track {
@@ -90,32 +101,40 @@
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
 
-    .bg-dark-accent {
-      background-color: #2d2d2d;
+    .nav-link {
+      color: var(--text-light);
     }
 
-    .bg-light-accent {
-      background-color: #fafafa;
+    .dark-mode .nav-link {
+      color: var(--text-dark);
+    }
+
+    .dark-mode .bg-gray-50 {
+      background-color: var(--bg-dark);
+    }
+
+    .dark-mode .bg-white {
+      background-color: var(--bg-dark);
+    }
+
+    .dark-mode .bg-gray-100 {
+      background-color: #111;
     }
   </style>
 </head>
 
-<body class="bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-[var(--text-light)] dark:text-[var(--text-dark)]">
+<body>
   <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-md">
+  <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md dark:bg-gray-900/80">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <nav class="hidden md:flex space-x-8">
-        <a href="#habilidades"
-          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Habilidades</a>
-        <a href="#sobre"
-          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Sobre</a>
-        <a href="#projetos"
-          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Projetos</a>
-        <a href="#hackathon"
-          class="nav-link hover:text-[var(--highlight-light)] dark:hover:text-[var(--highlight-dark)]">Hackathon</a>
+        <a href="#habilidades" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Habilidades</a>
+        <a href="#sobre" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Sobre</a>
+        <a href="#projetos" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Projetos</a>
+        <a href="#hackathon" class="nav-link hover:text-blue-500 dark:hover:text-indigo-300">Hackathon</a>
       </nav>
       <button id="botaoTema" onclick="alternarTema()"
-        class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+        class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
         🌓 Tema
       </button>
     </div>
@@ -153,12 +172,12 @@
       <div class="text-center" data-aos="fade-up">
         <h2 class="text-3xl font-bold mb-8">Sobre Mim</h2>
         <img src="assets/profile.jpg" alt="João Paulo"
-          class="w-48 h-48 rounded-full mx-auto mb-6 border-4 border-[var(--highlight-light)] dark:border-[var(--highlight-dark)]">
+          class="w-48 h-48 rounded-full mx-auto mb-6 border-4 border-blue-500 dark:border-indigo-300">
         <p class="text-lg leading-relaxed mb-6">
           Sou um desenvolvedor full stack apaixonado por criar soluções inovadoras...
         </p>
         <button onclick="abrirModal('sobre')"
-          class="btn bg-[var(--highlight-light)] hover:bg-[var(--highlight-light)] dark:bg-[var(--highlight-dark)] dark:hover:bg-[var(--highlight-dark)] text-white">Ver
+          class="btn bg-blue-500 hover:bg-blue-600 dark:bg-indigo-400 dark:hover:bg-indigo-500 text-white px-6 py-2 rounded-lg transition-colors">Ver
           mais</button>
       </div>
     </div>
@@ -175,7 +194,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 dark:bg-black text-white py-8">
+  <footer class="bg-gray-800 dark:bg-gray-900 text-white py-8">
     <div class="container mx-auto px-4 text-center">
       <p>&copy; 2024 João Paulo. Todos os direitos reservados.</p>
     </div>
@@ -192,25 +211,32 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Inicialização
-    AOS.init({
-      duration: 800,
-      once: true
-    });
-
-    // Controle do Tema
+    // Funções do tema
     function alternarTema() {
-      const html = document.documentElement;
-      html.classList.toggle('dark');
-      localStorage.setItem('tema', html.classList.contains('dark') ? 'dark' : 'light');
+      const element = document.body;
+      element.classList.toggle("dark-mode");
+      
+      // Atualizar localStorage
+      const temaAtual = element.classList.contains("dark-mode") ? "dark" : "light";
+      localStorage.setItem("tema", temaAtual);
+      
       atualizarBotaoTema();
     }
 
     function atualizarBotaoTema() {
-      const botao = document.getElementById('botaoTema');
-      botao.textContent = document.documentElement.classList.contains('dark') ? '☀️ Tema Claro' : '🌙 Tema Escuro';
+      const botao = document.getElementById("botaoTema");
+      const isDark = document.body.classList.contains("dark-mode");
+      botao.textContent = isDark ? "☀️ Tema Claro" : "🌙 Tema Escuro";
+    }
+
+    // Carregar tema salvo
+    function carregarTema() {
+      const temaSalvo = localStorage.getItem("tema") || "light";
+      if (temaSalvo === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+      atualizarBotaoTema();
     }
 
     // Carregar Habilidades
@@ -234,10 +260,10 @@
       { nome: "PostgreSQL", img: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" },
     ];
 
-    const carrosselTrack = document.querySelector('.carrossel-track');
+    const carrosselTrack = document.querySelector(".carrossel-track");
     habilidades.forEach(habilidade => {
-      const div = document.createElement('div');
-      div.classList.add('skill');
+      const div = document.createElement("div");
+      div.classList.add("skill");
       div.innerHTML = `
         <img src="${habilidade.img}" alt="${habilidade.nome}" class="mb-2">
         <span class="text-lg font-semibold">${habilidade.nome}</span>
@@ -245,10 +271,19 @@
       carrosselTrack.appendChild(div);
     });
 
-    // Carregar Tema
-    const temaSalvo = localStorage.getItem('tema') || 'light';
-    if (temaSalvo === 'dark') document.documentElement.classList.add('dark');
-    atualizarBotaoTema();
+    // Inicializar tema quando a página carregar
+    document.addEventListener("DOMContentLoaded", () => {
+      carregarTema();
+    });
+
+    // Funções do modal (simplificadas)
+    function abrirModal(tipo) {
+      document.getElementById(`modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).classList.remove("hidden");
+    }
+
+    function fecharModal(tipo) {
+      document.getElementById(`modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).classList.add("hidden");
+    }
   </script>
 </body>
 
