@@ -174,6 +174,12 @@
         </div>
       </div>
     </div>
+    <div class="text-center mt-8">
+      <button onclick="abrirModal('tecnologias')" class="font-semibold text-indigo-600 hover:text-indigo-800 underline">
+        Ver mais <span aria-hidden="true">&rarr;</span>
+      </button>
+    </div>
+
   </section>
 
   <!-- Sobre Mim -->
@@ -187,10 +193,10 @@
           Sou um desenvolvedor full stack apaixonado por criar soluções inovadoras...
         </p>
         <button onclick="abrirModal('sobre')"
-          class="btn bg-blue-500 hover:bg-blue-600 dark:bg-indigo-400 dark:hover:bg-indigo-500 text-white px-6 py-2 rounded-lg transition-colors">Ver
-          mais</button>
+          class="font-semibold text-indigo-600 hover:text-indigo-800 underline no-underline">
+          Ver mais <span aria-hidden="true">&rarr;</span>
+        </button>
       </div>
-    </div>
   </section>
 
   <!-- Projetos -->
@@ -210,7 +216,7 @@
     </div>
   </footer>
 
-  <!-- Modais sobre-->
+  <!-- Modal Sobre -->
   <div id="modalSobre" class="modal fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
     <div class="modal-content bg-white dark:bg-gray-800 w-full h-full overflow-y-auto p-8 relative">
       <button onclick="fecharModal('sobre')" class="absolute top-4 right-4 text-2xl hover:text-red-500">&times;</button>
@@ -219,81 +225,110 @@
         Informações detalhadas sobre experiência profissional e formação...
       </p>
     </div>
+  </div>
 
-    <script>
-      // Funções do tema
-      function alternarTema() {
-        const element = document.body;
-        element.classList.toggle("dark-mode");
+  <!-- ✅ Modal Tecnologias (fora do outro modal!) -->
+  <div id="modalTecnologias" class="modal fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
+    <div class="modal-content bg-white dark:bg-gray-800 w-full h-full overflow-y-auto p-8 relative">
+      <button onclick="fecharModal('tecnologias')"
+        class="absolute top-4 right-4 text-2xl hover:text-red-500">&times;</button>
+      <h3 class="text-2xl font-bold mb-4">Mais sobre as Tecnologias</h3>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        Aqui você encontra uma descrição mais completa das tecnologias que domino, experiências com cada uma e como elas
+        são aplicadas nos projetos.
+      </p>
+      <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+        <li><strong>React / Next.js:</strong> Experiência com componentes, hooks, SSR, SSG e APIs REST/GraphQL.</li>
+        <li><strong>TypeScript:</strong> Uso avançado para tipagem forte e maior manutenção em código front e back-end.
+        </li>
+        <li><strong>Node.js:</strong> Criação de APIs, middlewares e integração com bancos de dados (Prisma,
+          PostgreSQL).</li>
+        <li><strong>Tailwind CSS:</strong> Estilização responsiva e otimizada para performance e acessibilidade.</li>
+        <li><strong>SQL / PostgreSQL / MySQL:</strong> Modelagem de dados e escrita de queries complexas.</li>
+        <li><strong>Git / GitHub:</strong> Controle de versão com branchs, pull requests, CI/CD.</li>
+        <li><strong>Java / C#:</strong> Conhecimento básico a intermediário em POO, APIs REST e estruturas MVC.</li>
+      </ul>
+    </div>
+  </div>
 
-        // Atualizar localStorage
-        const temaAtual = element.classList.contains("dark-mode") ? "dark" : "light";
-        localStorage.setItem("tema", temaAtual);
 
-        atualizarBotaoTema();
+
+  <script>
+    // Funções do tema
+    function alternarTema() {
+      const element = document.body;
+      element.classList.toggle("dark-mode");
+
+      // Atualizar localStorage
+      const temaAtual = element.classList.contains("dark-mode") ? "dark" : "light";
+      localStorage.setItem("tema", temaAtual);
+
+      atualizarBotaoTema();
+    }
+
+    function atualizarBotaoTema() {
+      const botao = document.getElementById("botaoTema");
+      const isDark = document.body.classList.contains("dark-mode");
+      botao.textContent = isDark ? "☀️ Tema Claro" : "🌙 Tema Escuro";
+    }
+
+    // Carregar tema salvo
+    function carregarTema() {
+      const temaSalvo = localStorage.getItem("tema") || "light";
+      if (temaSalvo === "dark") {
+        document.body.classList.add("dark-mode");
       }
+      atualizarBotaoTema();
+    }
 
-      function atualizarBotaoTema() {
-        const botao = document.getElementById("botaoTema");
-        const isDark = document.body.classList.contains("dark-mode");
-        botao.textContent = isDark ? "☀️ Tema Claro" : "🌙 Tema Escuro";
-      }
+    // Carregar Habilidades
+    const habilidades = [
+      { nome: "TypeScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", nivel: "Avançado" },
+      { nome: "Tailwind CSS", img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg", nivel: "Avançado" },
+      { nome: "Bootstrap", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", nivel: "Intermediario" },
+      { nome: "Git", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", nivel: "Intermediario" },
+      { nome: "GitHub", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", nivel: "Intermediario" },
+      { nome: "Java", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", nivel: "Básico" },
+      { nome: "SQL", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", nivel: "Intermediario" },
+      { nome: "C#", img: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png", nivel: "Intermediario" },
+      { nome: "Prisma", img: "https://cdn.worldvectorlogo.com/logos/prisma-4.svg", nivel: "Básico" },
+      { nome: "Node.js", img: "https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-5-pack-logos-icons-3030179.png?f=webp&w=256", nivel: "Avançado" },
+      { nome: "React", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", nivel: "Avançado" },
+      { nome: "Next.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", nivel: "Intermediario" },
+      { nome: "JavaScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", nivel: "Avançado" },
+      { nome: "HTML5", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", nivel: "Avançado" },
+      { nome: "CSS3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", nivel: "Intermediario" },
+      { nome: "Figma", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", nivel: "Básico" },
+      { nome: "PostgreSQL", img: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg", nivel: "Básico" },
+    ];
 
-      // Carregar tema salvo
-      function carregarTema() {
-        const temaSalvo = localStorage.getItem("tema") || "light";
-        if (temaSalvo === "dark") {
-          document.body.classList.add("dark-mode");
-        }
-        atualizarBotaoTema();
-      }
-
-      // Carregar Habilidades
-      const habilidades = [
-        { nome: "TypeScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-        { nome: "Tailwind CSS", img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" },
-        { nome: "Bootstrap", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
-        { nome: "Git", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-        { nome: "GitHub", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-        { nome: "Java", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-        { nome: "SQL", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-        { nome: "C#", img: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" },
-        { nome: "Prisma", img: "https://cdn.worldvectorlogo.com/logos/prisma-4.svg" },
-        { nome: "Node.js", img: "https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-5-pack-logos-icons-3030179.png?f=webp&w=256" },
-        { nome: "React", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { nome: "Next.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-        { nome: "JavaScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-        { nome: "HTML5", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-        { nome: "CSS3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-        { nome: "Figma", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-        { nome: "PostgreSQL", img: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" },
-      ];
-
-      const carrosselTrack = document.querySelector(".carrossel-track");
-      habilidades.forEach(habilidade => {
-        const div = document.createElement("div");
-        div.classList.add("skill");
-        div.innerHTML = `
+    const carrosselTrack = document.querySelector(".carrossel-track");
+    habilidades.forEach(habilidade => {
+      const div = document.createElement("div");
+      div.classList.add("skill");
+      div.innerHTML = `
         <img src="${habilidade.img}" alt="${habilidade.nome}" class="mb-2">
         <span class="text-lg font-semibold">${habilidade.nome}</span>
-      `;
-        carrosselTrack.appendChild(div);
-      });
+        <span class="text-lg font-semibold">${habilidade.nivel}</span>
+        `;
+      carrosselTrack.appendChild(div);
+    });
 
-      // Inicializar tema quando a página carregar
-      document.addEventListener("DOMContentLoaded", () => {
-        carregarTema();
-      });
 
-      // Funções do modal (simplificadas)
-      function abrirModal(tipo) {
-        document.getElementById(`modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).classList.remove("hidden");
-      }
 
-      function fecharModal(tipo) {
-        document.getElementById(`modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).classList.add("hidden");
-      }
-    </script>
+    function abrirModal(tipo) {
+      const id = `modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+      document.getElementById(id)?.classList.remove("hidden");
+    }
+
+    function fecharModal(tipo) {
+      const id = `modal${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+      document.getElementById(id)?.classList.add("hidden");
+    }
+
+    // Inicialização
+    document.addEventListener("DOMContentLoaded", carregarTema);
+  </script>
 </body>
 
 </html>
